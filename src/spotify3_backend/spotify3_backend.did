@@ -1,3 +1,78 @@
+// This is your main Candid interface for the Uptime Monitoring Canister
+
+type Website = record {
+  id: nat64;
+  url: text;
+  frequency: nat64;
+  status: text;
+  last_checked: nat64;
+};
+
 service : {
-    "greet": (text) -> (text) query;
-}
+
+  // **************
+  // ADMIN / PUBLIC
+  // **************
+
+  // Health check (basic public method)
+  health_check : () -> (text);
+
+  // Get validator leaderboard (optional)
+  get_validators : () -> (vec record {
+    validator : principal;
+    reputation : nat;
+    balance : nat;
+  });
+
+  // **************
+  // COMPANY USERS / CUSTOMERS
+  // **************
+
+  // Register a new company (optional if using Internet Identity)
+  register_company : (text) -> (bool);
+
+  // Company submits their website URL for monitoring
+  submit_website : (
+    text,     // URL
+    nat64     // Frequency (in minutes)
+  ) -> (nat64);  // Returns website ID
+
+  // View all submitted websites for a company
+  get_my_websites : () -> (vec Website);
+
+  // Get uptime reports for a specific website
+get_uptime_report : (nat64) -> (vec record {
+  timestamp : nat64;
+  status : text;
+  response_time : nat; // use nat64 if you use u64 in Rust
+  validator : principal;
+});
+
+
+
+  // **************
+  // VALIDATORS
+  // **************
+
+  // Validator signup
+  register_validator : (text) -> (bool);
+
+  // Get assigned websites to monitor
+  get_assigned_websites : () -> (vec record {
+    id : nat64;
+    url : text;
+  });
+
+  // Submit uptime proof for a website
+  submit_uptime_proof : (
+    nat64,   // website_id
+    text,    // status (e.g. "up" / "down")
+    nat64    // response_time (in ms)
+  ) -> (bool);
+
+  // Validator reward balance
+  get_balance : () -> (int64);  // Amount of reward tokens
+
+  // Withdraw rewards
+  withdraw_rewards : () -> (bool);
+};
