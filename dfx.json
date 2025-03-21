@@ -1,0 +1,38 @@
+{
+  "canisters": {
+    "internet_identity": {
+      "candid": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity.did",
+      "frontend": {},
+      "remote": {
+        "id": {
+          "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+        }
+      },
+      "type": "custom",
+      "wasm": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity_dev.wasm.gz"
+    },
+    "spotify3_backend": {
+      "candid": "src/spotify3_backend/spotify3_backend.did",
+      "package": "spotify3_backend",
+      "type": "rust"
+    },
+    "spotify3_frontend": {
+      "dependencies": [
+        "spotify3_backend"
+      ],
+      "source": [
+        "src/spotify3_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "spotify3_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
