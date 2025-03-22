@@ -30,6 +30,7 @@ service : {
 
   // Register a new company (optional if using Internet Identity)
   register_company : (text) -> (bool);
+  get_website_url : (nat64) -> (text);
 
   // Company submits their website URL for monitoring
   submit_website : (

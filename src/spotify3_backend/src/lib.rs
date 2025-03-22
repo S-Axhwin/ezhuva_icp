@@ -92,6 +92,42 @@ fn register_company(_name: String) -> bool {
     })
 }
 
+
+#[update]
+fn get_website_url(website_id: u64) -> String {
+    ic_cdk::println!("Looking for website_id: {}", website_id);
+
+    COMPANY_WEBSITES.with(|companies| {
+        let companies_ref = companies.borrow();
+
+        // Print all website IDs for debugging
+        for (company, websites) in companies_ref.iter() {
+            ic_cdk::println!("Company: {}, websites count: {}", company, websites.len());
+
+            for w in websites.iter() {
+                ic_cdk::println!("Website id: {}, url: {}", w.id, w.url);
+            }
+        }
+
+        companies_ref
+            .values()
+            .flat_map(|websites| websites.iter())
+            .find(|w| {
+                ic_cdk::println!("Checking website_id: {}", w.id);
+                w.id == website_id
+            })
+            .map(|w| {
+                ic_cdk::println!("Found website: {}", w.url);
+                w.url.clone()
+            })
+    })
+    .unwrap_or_else(|| {
+        ic_cdk::println!("Website not found!");
+        "".to_string()
+    })
+}
+
+
 // Submit a website for monitoring
 #[update]
 fn submit_website(url: String, frequency: u64) -> u64 {

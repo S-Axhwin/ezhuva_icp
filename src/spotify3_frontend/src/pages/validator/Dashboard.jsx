@@ -3,24 +3,24 @@ import useAuth from "../../useAuth";
 import { Button } from "../../components/ui/button";
 import { ModeToggle } from "../../components/mode-toggle";
 
-async function isUrlAlive(url) {
+async function checkWebsite(url) {
   try {
-    var request = new XMLHttpRequest();  
-    request.open('GET', url, true);
-    request.onreadystatechange = function(){
-        if (request.readyState === 4){
-            if (request.status === 404) {  
-                return false;
-            }  
-        }
-    };
-    request.send();
-    console.log("URL is alive");
+    console.log(url);
+    
+    const response = await fetch("https://"+url, {
+      method: 'GET',
+      mode: 'no-cors',
+    });
+    console.log(response);
+    
+    console.log(`✅ ${url} seems alive! (opaque response)`);
     return true;
   } catch (error) {
+    console.log(`❌ ${url} is not reachable!`, error);
     return false;
   }
 }
+
 
 const Dashboard = () => {
   const { auth } = useAuth();
@@ -72,7 +72,7 @@ const Dashboard = () => {
               assignedWebsites.forEach((element) => {
                 console.log("Checking:", element);
 
-                isUrlAlive(element.url).then((isAlive) => {
+                checkWebsite(element.url).then((isAlive) => {
                   backendActor.submit_uptime_proof(
                     element.id,
                     isAlive ? "up" : "down",

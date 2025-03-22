@@ -4,6 +4,7 @@ import { Input } from "../../components/ui/input";
 import useAuth from "../../useAuth";
 import { RefreshCw, Plus, Globe, CircleDot, Link as Link2 } from "lucide-react";
 import { toast } from "sonner"
+import { Link } from "react-router-dom";
 
 
 const CompanyDashboard = () => {
@@ -109,6 +110,11 @@ const CompanyDashboard = () => {
       >
         <Link2 size={"1rem"} className="inline-block" />
       </a>
+      <Link to={`/dashboard/${website.id}`}>
+        <Button variant="outline" className="text-white">
+          Details
+        </Button>
+      </Link>
     </h2>
   </div>
   <div className="flex items-center gap-2 text-sm">
@@ -137,8 +143,8 @@ const CompanyDashboard = () => {
         : "In Progress"}
     </span>
   </div>
-</div>
 
+</div>
 
             ))
           )}

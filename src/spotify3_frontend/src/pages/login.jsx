@@ -31,8 +31,13 @@ export const LoginPage = () => {
     if (!authClient) await initAuthClient();
   
     // Opens the II window for login
+    console.log(`http://${backendCanisterId}.localhost.ic0.app/`)
     await authClient.login({
-      identityProvider: process.env.DFX_NETWORK == "ic" ? "https://identity.ic0.app/" :"http://asrmz-lmaaa-aaaaa-qaaeq-cai.localhost:4943/", 
+      
+      identityProvider: process.env.DFX_NETWORK == "ic" 
+      ? "https://identity.ic0.app/" 
+      : "http://bkyz2-fmaaa-aaaaa-qaaaq-cai.localhost:4943/"
+      , 
       onSuccess: async () => {
         const identity = authClient.getIdentity();
         const principal = identity.getPrincipal().toString();
