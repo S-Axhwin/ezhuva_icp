@@ -4,6 +4,7 @@ import Dashboard from "./pages/validator/Dashboard";
 import CompanyDashboard from "./pages/company/CompanyDashboard";
 import useAuth from "./useAuth";
 import Webpage from "./pages/company/Webpage";
+import LandingPage from "./pages/LandingPage";
 
 
 
@@ -12,6 +13,7 @@ const App = () => {
   return (
     <>
       <Routes>
+        <Route path="/" element={<LandingPage/>}/>
         {auth ? (
           <>
             {auth.type === "validator" ? (

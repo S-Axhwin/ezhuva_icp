@@ -236,7 +236,7 @@ fn submit_uptime_proof(website_id: u64, status: String, response_time: u64) -> b
         let mut validators = validators.borrow_mut();
         if let Some(v) = validators.get_mut(&user) {
             v.reputation += 1;
-            v.balance += 10; // reward points
+            v.balance += 1; // reward points
         }
     });
 

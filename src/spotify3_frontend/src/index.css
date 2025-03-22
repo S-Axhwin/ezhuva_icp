@@ -117,4 +117,7 @@
   body {
     @apply bg-background text-foreground;
   }
+  .para-button {
+    text-shadow: 0 0 10px rgb(90 255 21 / 0.7), 0 0 20px rgb(90 255 21 / 0.5), 0 0 30px rgb(90 255 21 / 0.3);
+  }
 }
