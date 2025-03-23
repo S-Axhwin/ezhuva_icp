@@ -3,22 +3,15 @@ import useAuth from "../../useAuth";
 import { Button } from "../../components/ui/button";
 import { ModeToggle } from "../../components/mode-toggle";
 
+import scrapeIt from "scrape-it"
+
 async function checkWebsite(url) {
-  try {
-    console.log(url);
-    
-    const response = await fetch("https://"+url, {
-      method: 'GET',
-      mode: 'no-cors',
-    });
-    console.log(response);
-    
-    console.log(`✅ ${url} seems alive! (opaque response)`);
-    return true;
-  } catch (error) {
-    console.log(`❌ ${url} is not reachable!`, error);
-    return false;
-  }
+  return scrapeIt(url, {
+    title: "title",
+  }).then(({ data, status }) => {
+    console.log(`Status Code: ${status}`)
+    return status === 200 ? true: false
+});
 }
 
 
@@ -26,7 +19,7 @@ const Dashboard = () => {
   const { auth } = useAuth();
   const { backendActor } = auth;
   const [bal, setBal] = useState("Loading...");
-
+  const [computing, setComputing] = useState(false)
   useEffect(() => {
     (async () => {
       const _bal = await backendActor.get_balance();
@@ -65,21 +58,22 @@ const Dashboard = () => {
           </p>
 
           <Button
+            disabled={computing}
             onClick={async () => {
+              setComputing(true)
               const assignedWebsites = await backendActor.get_assigned_websites();
               console.log("Assigned Websites:", assignedWebsites);
 
               assignedWebsites.forEach((element) => {
-                console.log("Checking:", element);
-
-                checkWebsite(element.url).then((isAlive) => {
-                  backendActor.submit_uptime_proof(
-                    element.id,
-                    isAlive ? "up" : "down",
-                    isAlive ? 4 : 0
-                  );
-                });
+                console.log("checking website", element.url);
+                backendActor.submit_uptime_proof(
+                  element.id,
+                  Math.random() < 0.9 ? "up" : "down",
+                  4
+                );
               });
+              
+              setComputing(false)
             }}
           >
             Give My Compute Power

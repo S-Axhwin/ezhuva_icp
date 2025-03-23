@@ -33,7 +33,7 @@ const LandingPage = () => {
                 to monitor uptime effortlessly!
               </h1>
               
-              <Link to={`/login`} className={cn("para-button text-lg px-8 py-4 mt-8 animate-pulse-light", isLoaded ? "animate-fade-in-up opacity-100" : "opacity-0")} style={{
+              <Link to={`/login`} className={cn("px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xl transition-all shadow-lg", isLoaded ? "animate-fade-in-up opacity-100" : "opacity-0")} style={{
               animationDelay: "600ms"
             }}>
                 Start monitoring

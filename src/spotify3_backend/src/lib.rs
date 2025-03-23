@@ -232,6 +232,7 @@ fn register_validator(name: String) -> bool {
 // Get assigned websites (returns all websites for now)
 #[query]
 fn get_assigned_websites() -> Vec<AssignedWebsite> {
+    
     COMPANY_WEBSITES.with(|companies| {
         companies.borrow()
             .values()
