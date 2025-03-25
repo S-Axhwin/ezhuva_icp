@@ -1,38 +1,54 @@
-# Spotify3 - Decentralized Music Streaming
+# Uptime Monitoring System
+
+## Overview
+This project is a **decentralized uptime monitoring system** built using **React** for the frontend and **Rust (using the Internet Computer Protocol - ICP)** for the backend. It allows users to monitor the availability of various services and receive alerts when downtime is detected.
 
 ## Tech Stack
-- **Frontend**: React (Vite)
-- **Backend**: Rust (Internet Computer Protocol - ICP)
-- **Package Manager**: Bun / npm
-- **Configuration & Build**: TypeScript, Vite, Cargo
+- **Frontend:** React, TypeScript, Vite
+- **Backend:** Rust, Internet Computer Protocol (ICP)
+- **Blockchain:** Dfinity Canisters
 
-## Project Structure
+## File Structure
+```
+/src
+│── spotify3_backend/  # Backend logic (Rename as needed for uptime monitoring system)
+│   ├── src/           # Source code for backend (Rust)
+│   ├── Cargo.toml     # Rust dependencies and configurations
+│   ├── spotify3_backend.did  # Interface definition file for canisters
+│
+│── spotify3_frontend/ # Frontend logic
+│   ├── public/        # Static assets
+│   ├── src/           # Source code for frontend (React)
+│   ├── components.json # JSON config for UI components
+│   ├── index.html     # Main HTML file
+│   ├── package.json   # Dependencies and scripts for frontend
+│   ├── tsconfig.json  # TypeScript configuration
+│   ├── vite.config.js # Vite configuration
+│
+│── .gitignore        # Files to be ignored by Git
+│── Cargo.lock        # Cargo lock file for Rust dependencies
+│── Cargo.toml        # Rust project configuration
+│── dfx.json          # Configuration for ICP canisters
+│── canister_ids.json # Deployed canister IDs
+│── OLDcanister_ids.json # Backup of older canister IDs
+│── bun.lockb         # Lock file for Bun package manager
+│── README.md         # Project documentation
+```
 
-### Root Directory
-- **`Cargo.toml` / `Cargo.lock`**: Rust package manager and dependency files.
-- **`dfx.json`**: Configuration file for DFINITY canister setup.
-- **`package.json`**: Contains dependencies and scripts for the frontend project.
-- **`tsconfig.json`**: TypeScript configuration for the frontend.
-- **`.gitignore`**: Specifies files to be ignored in version control.
+## Running the Project
+1. **Install DFX** from the official website: [DFX Installation Guide](https://internetcomputer.org/docs/building-apps/getting-started/install)
+2. **Clone or Fork** the project: [GitHub Repository](https://github.com/S-Axhwin/ezhuva_icp)
+3. Navigate to the project directory:
+   ```sh
+   cd ezhuva_icp
+   ```
+4. **Start the local blockchain server**:
+   ```sh
+   dfx start
+   ```
+5. **Deploy the canister to the local blockchain**:
+   ```sh
+   dfx deploy
+   ```
 
-### `spotify3_backend/`
-This folder contains the backend logic written in Rust for ICP.
-- **`src/`**: Contains Rust source code.
-- **`Cargo.toml`**: Defines dependencies and settings for the Rust backend.
-- **`spotify3_backend.did`**: Defines the backend's interface for interacting with frontend.
-
-### `spotify3_frontend/`
-This folder contains the frontend code built using React and Vite.
-- **`public/`**: Static assets such as images, icons, and HTML files.
-- **`src/`**: Contains React components, pages, and application logic.
-- **`components.json`**: A JSON file related to frontend component organization.
-- **`index.html`**: Entry point for the frontend application.
-- **`vite.config.js`**: Configuration file for Vite.
-
-### Other Files
-- **`bun.lockb`**: Lock file for Bun package manager.
-- **`canister_ids.json`**: Contains details about deployed canisters on the Internet Computer.
-- **`OLDcanister_ids.json`**: Previous version of the `canister_ids.json` file.
-
-This structure organizes the project into clear sections for backend, frontend, and configuration files, ensuring smooth development and deployment.
-
+This will launch the backend canisters and make the frontend available for use. 🚀
